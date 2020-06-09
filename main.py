@@ -1,0 +1,15 @@
+# coding=utf-8
+#!/usr/bin/env python
+from tot_reported_cases import *
+
+
+from bokeh.layouts import layout
+from bokeh.plotting import output_file, show
+
+output_file('index.html', 'Lägesbild COVID-19 i Skåne', mode="cdn")
+
+p1 = tot_reported_cases()
+
+lay = layout([p1])
+lay.spacing = 0
+show(lay)
