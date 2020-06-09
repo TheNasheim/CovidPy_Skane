@@ -4,6 +4,7 @@
 from tot_reported_cases import *
 from municipalities_cases import *
 from cases_gender_and_age import *
+from hospitalized import *
 
 from bokeh.layouts import layout
 from bokeh.plotting import output_file, show
@@ -13,6 +14,7 @@ output_file('index.html', 'Lägesbild COVID-19 i Skåne', mode="cdn")
 p1 = tot_reported_cases()
 p2 = municipalities_cases()
 p3 = cases_gender_and_age()
+p4 = hospitalized()
 lay = layout([p1], [p2])
 lay.spacing = 0
 show(lay)
