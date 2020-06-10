@@ -5,7 +5,7 @@ import numpy as np
 
 from bokeh.plotting import figure
 from bokeh.models.formatters import DatetimeTickFormatter
-from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool
+from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool, FixedTicker
 from bokeh.layouts import column
 from datetime import timedelta
 from fixthedates import *
@@ -19,7 +19,7 @@ def deceased_cases():
     apd.dropna()
     date = apd['Date'].copy().tolist()
     date = fix_dates(date)
-
+    tickers = fix_mondays(date).astype(int) / 10 ** 6
     tot = apd['Totalt antal avlidna i Skåne'].tolist()
     tot = [int(i) for i in tot]
 
@@ -66,6 +66,7 @@ def deceased_cases():
         }))
 
     p.xaxis.axis_label = 'Datum'
+    p.xaxis.ticker = FixedTicker(ticks=list(tickers))
     p.yaxis.axis_label = 'Totala Fall'
     p.toolbar_location = None
     p.grid.grid_line_alpha = 0.3

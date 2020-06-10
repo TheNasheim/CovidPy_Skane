@@ -23,3 +23,8 @@ def fix_dates(listIn):
     listIn = [d.replace(' ', '') for d in listIn]
     listIn = pd.to_datetime(listIn, format='%-d %m %Y', dayfirst=True, infer_datetime_format=True)
     return listIn
+
+
+def fix_mondays(listIn):
+    listIn = listIn[listIn.weekday==0]
+    return listIn

@@ -3,7 +3,7 @@
 import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models.formatters import DatetimeTickFormatter
-from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool
+from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool, FixedTicker
 from bokeh.layouts import column
 from datetime import timedelta
 from fixthedates import *
@@ -19,6 +19,7 @@ def tot_reported_cases():
     trc.dropna()
     date = trc['Date'].copy().tolist()
     date = fix_dates(date)
+    tickers = fix_mondays(date).astype(int) / 10 ** 6
     tot = trc['Totalt antal personer med konstaterad covid-19'].tolist()
     tot = [int(i) for i in tot]
     newtoday = trc['Nya konstaterade personer'].tolist()
@@ -59,6 +60,11 @@ def tot_reported_cases():
     p.line(y='Tot', x='Date', color="red", legend_label="Totalt antal personer med konstaterad covid-19", source=data)
 
     p.xaxis.formatter = DatetimeTickFormatter(days=["%Y-%m-%d"])
+
+    p.xaxis.minor_tick_line_color = "orange"
+    p.xaxis.ticker = FixedTicker(ticks=list(tickers))
+    #p.xaxis.ticker = DaysTicker(days=np.arange(1, 32,7))
+
     p.legend.location = "top_left"
     p.legend.background_fill_alpha = 0.2
     p.legend.border_line_alpha = 0.0
