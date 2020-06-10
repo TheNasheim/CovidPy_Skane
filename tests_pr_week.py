@@ -7,15 +7,14 @@ from bokeh.models import Range1d, LinearAxis
 from bokeh.transform import dodge
 
 
-
 def tests_pr_week():
-    excelFile = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/prover-per-vecka.xlsx'
-    excelFile2 = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/konstaterade-per-vecka.xlsx'
+    excel_file = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/prover-per-vecka.xlsx'
+    excel_file2 = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/konstaterade-per-vecka.xlsx'
 
-    ppv = pd.read_excel(excelFile, sheet_name='Blad1',
+    ppv = pd.read_excel(excel_file, sheet_name='Blad1',
                         usecols=['Unnamed: 0', 'Vård- och omsorgspersonal', 'Patienter och boende'])
-    kpv = pd.read_excel(excelFile2, sheet_name='Blad1', usecols=['Unnamed: 0', 'Konstaterad vård- och omsorgspersonal',
-                                                                 'Konstaterade patienter och övriga'])
+    kpv = pd.read_excel(excel_file2, sheet_name='Blad1', usecols=['Unnamed: 0', 'Konstaterad vård- och omsorgspersonal',
+                                                                  'Konstaterade patienter och övriga'])
 
     ppv.rename(columns={'Unnamed: 0': 'Vecka'}, inplace=True)
     kpv.rename(columns={'Unnamed: 0': 'Vecka'}, inplace=True)
@@ -75,7 +74,7 @@ def tests_pr_week():
     ]
 
     p = figure(y_range=(0, max(totweek) * 1.2), x_range=vecka, plot_height=300, plot_width=670,
-               title="Prover tagna och konstaterade. Uppdateras 1ggr/vecka",
+               title="Prover tagna och konstaterade. Uppdateras varje onsdag",
                tooltips=tooltips,
                toolbar_location=None, tools="")
 

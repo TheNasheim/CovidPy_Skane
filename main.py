@@ -1,5 +1,6 @@
 # coding=utf-8
-#!/usr/bin/env python
+# !/usr/bin/env python
+
 from header import *
 from tot_reported_cases import *
 from municipalities_cases import *

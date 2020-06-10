@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+
 from bokeh.plotting import figure
 from bokeh.models.formatters import DatetimeTickFormatter
 from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool, FixedTicker
 from bokeh.layouts import column
 from datetime import timedelta
-from fixthedates import *
+from fixthedates import fix_dates, fix_mondays, datetime
 
 
 def tot_reported_cases():
-    tot_rep_cases = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/totalt-antal-konstaterade-covid-fall.xlsx'
+    tot_rep_cases = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/totalt-antal-konstaterade-covid' \
+                    '-fall.xlsx '
 
     trc = pd.read_excel(tot_rep_cases, sheet_name='Blad1',
                         usecols=['Unnamed: 0', 'Totalt antal personer med konstaterad covid-19',
@@ -84,4 +86,3 @@ def tot_reported_cases():
     select.xaxis.formatter = DatetimeTickFormatter(days=["%Y-%m-%d"])
 
     return column(p, select)
-

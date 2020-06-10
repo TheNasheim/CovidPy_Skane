@@ -5,6 +5,7 @@ from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.transform import dodge
 
+
 def cases_gender_and_age():
     covid_age_gender = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/sjukdomsfall-per-alder-kon.xlsx'
 
@@ -32,7 +33,7 @@ def cases_gender_and_age():
         ("Antal Kvinnor", "@women"), ]
 
     p = figure(x_range=ages, plot_height=250, plot_width=670,
-               title="Sjukdomsfall per ålder och kön. Uppdateras 1ggr/vecka",
+               title="Sjukdomsfall per ålder och kön. Uppdateras varje onsdag",
                toolbar_location=None, tooltips=tooltips, tools="")
 
     p.vbar(x=dodge('ages', -0.15, range=p.x_range), top='men', width=0.3, source=source,
@@ -46,5 +47,3 @@ def cases_gender_and_age():
     p.legend.location = "top_left"
     p.legend.orientation = "vertical"
     return p
-
-

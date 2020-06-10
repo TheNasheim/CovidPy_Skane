@@ -1,14 +1,12 @@
 # coding=utf-8
-
 import pandas as pd
-import numpy as np
 
 from bokeh.plotting import figure
 from bokeh.models.formatters import DatetimeTickFormatter
 from bokeh.models import Range1d, LinearAxis, RangeTool, HoverTool, FixedTicker
 from bokeh.layouts import column
 from datetime import timedelta
-from fixthedates import *
+from fixthedates import fix_dates, fix_mondays, datetime
 
 
 def deceased_cases():
@@ -101,4 +99,3 @@ def deceased_cases():
     select.xaxis.formatter = DatetimeTickFormatter(days=["%Y-%m-%d"])
 
     return column(p, select)
-

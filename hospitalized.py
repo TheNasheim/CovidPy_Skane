@@ -2,10 +2,11 @@
 import pandas as pd
 from bokeh.plotting import figure
 
-def hospitalized():
-    excelFile = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/inlagda-per-sjukhus.xlsx'
 
-    ips = pd.read_excel(excelFile, sheet_name='Blad1', usecols="B:E")
+def hospitalized():
+    excel_file = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/inlagda-per-sjukhus.xlsx'
+
+    ips = pd.read_excel(excel_file, sheet_name='Blad1', usecols="B:E")
     ips = ips.dropna(subset=['Sjukhusort', 'Vårdavdelning'])
     ips.drop(ips.loc[ips['Sjukhusort'] == 'TOTALT'].index, inplace=True)
     ips['Intensivvårdsavdelning'] = ips['Intensivvårdsavdelning'].fillna(0)

@@ -4,13 +4,15 @@ import datetime
 from bokeh.models.widgets import Div
 from bokeh.layouts import row, layout
 
+
 def info_head():
-    reported_cases_excel = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/totalt-antal-konstaterade-covid-fall.xlsx'
+    reported_cases_excel = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/totalt-antal-konstaterade' \
+                           '-covid-fall.xlsx '
     hospitalized_excel = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/inlagda-per-sjukhus.xlsx'
     deceaced_excel = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/avlidna-per-dag.xlsx'
 
     takcf = pd.read_excel(reported_cases_excel, sheet_name='Blad1',
-                        usecols=['Totalt antal personer med konstaterad covid-19', 'Nya konstaterade personer'])
+                          usecols=['Totalt antal personer med konstaterad covid-19', 'Nya konstaterade personer'])
     totrc = takcf['Totalt antal personer med konstaterad covid-19'].tolist()
     totrc = [int(i) for i in totrc]
     totrep = totrc[-1]
@@ -53,7 +55,8 @@ def info_head():
     # initial html text
     template1 = ("""
           <div class='content' style='margin:auto;width:930px;padding:0px;'>
-           <p style='text-align:left;margin:0px'><b>Antal fall av covid-19 i Skåne</b> - data hämtas 3 gånger om dagen ifrån <a href="https://www.skane.se/">Region Skåne</a>.
+           <p style='text-align:left;margin:0px'><b>Antal fall av covid-19 i Skåne</b>
+            - data hämtas 3 gånger om dagen ifrån <a href="https://www.skane.se/">Region Skåne</a>.
            <span style='float:right;margin:0px'>Senaste data hämtades: {downloadtime}</span></p>
            <hr>
           </div>
@@ -64,7 +67,8 @@ def info_head():
 
     # initial html text
     template2 = ("""
-          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;padding-left:10px;padding-right:10px;padding-top:0px;'>
+          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;
+          padding-left:10px;padding-right:10px;padding-top:0px;'>
            <p class='name' style='text-align:center;margin:auto;width:100%;padding:0px;'><big>Sjukdomsfall</big><br />
            <h2 style='line-height: 20%'>{total_reported}</h2>
            Nya fall: <b>{reported_today}</b> | Genomsnitt på 7 dagar: <b>{reported_avg}</b></p>
@@ -76,8 +80,10 @@ def info_head():
 
     # initial html text
     template3 = ("""
-          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;padding-left:10px;padding-right:10px;padding-top:0px;'>
-           <p class='name' style='text-align:center;margin:auto;width:100%;padding:0px;'><big>Inlagda på sjukhus</big><br />
+          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;
+          padding-left:10px;padding-right:10px;padding-top:0px;'>
+           <p class='name' style='text-align:center;margin:auto;width:100%;padding:0px;'><big>Inlagda på sjukhus</big>
+           <br />
            <h2 style='line-height: 20%'><b>{total_reported}</b></h2>
            Vårdavdelning: <b>{hosp_varden}</b> | Intensivvården: <b>{hosp_intensiven}</b> </p>
           </div>
@@ -88,7 +94,8 @@ def info_head():
 
     # initial html text
     template4 = ("""
-          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;padding-left:10px;padding-right:10px;padding-top:0px;'>
+          <div class='content' style='text-align:center;margin:auto;width:300px;border:0px solid black;
+          padding-left:10px;padding-right:10px;padding-top:0px;'>
            <p class='name' style='text-align:center;margin:auto;width:100%;padding:0px;'><big>Avlidna</big><br />
            <h2 style='line-height: 20%'><b>{total_reported}</b></h2>
            På sjukhus: <b>{hosp_varden}</b> | Utanför sjukhus: <b>{hosp_intensiven}</b> </p>
@@ -111,5 +118,3 @@ def info_head():
     ro = row(tot_cases_info, hospitalized_info, deceased_info)
     lay = layout(div_info, ro, spacer)
     return lay
-
-
