@@ -44,5 +44,3 @@ def fix_values(listin):
             listin[n] = '5'
 
     return listin
-
-
