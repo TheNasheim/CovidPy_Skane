@@ -63,7 +63,6 @@ def tot_reported_cases():
 
     p.xaxis.minor_tick_line_color = "orange"
     p.xaxis.ticker = FixedTicker(ticks=list(tickers))
-    #p.xaxis.ticker = DaysTicker(days=np.arange(1, 32,7))
 
     p.legend.location = "top_left"
     p.legend.background_fill_alpha = 0.2
