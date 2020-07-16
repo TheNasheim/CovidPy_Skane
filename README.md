@@ -6,6 +6,7 @@ CovidPy_Skane
 * Number of cases of covid-19 in Skåne - data is collected from [Region Skåne](https://www.skane.se/).
 * This is created for a training project to be able to retrieve, distribute data and display different tables.
 * The data is ment to be generated on a Raspberry Pi.
+* PEP 8 Style
 
 
 ### Created with Versions.
