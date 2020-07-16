@@ -19,7 +19,7 @@ def fix_dates(listin):
     listin = [d.replace(' juli ', '-07-') for d in listin]
     listin = [d.replace(' augusti ', '-08-') for d in listin]
     listin = [d.replace(' september ', '-09-') for d in listin]
-    listin = [d.replace(' oktober  ', '-10-') for d in listin]
+    listin = [d.replace(' oktober ', '-10-') for d in listin]
     listin = [d.replace(' november ', '-11-') for d in listin]
     listin = [d.replace(' december ', '-12-') for d in listin]
     listin = [d.replace(' ', '') for d in listin]
