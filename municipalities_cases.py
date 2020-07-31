@@ -8,8 +8,7 @@ from bokeh.models import ColumnDataSource
 
 def municipalities_cases():
     excel_file = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/antal-fall-per-kommun.xlsx'
-
-    afpk = pd.read_excel(excel_file, sheet_name='Blad1', usecols=['Kommun', 'Antal fall'])
+    afpk = pd.read_excel(excel_file, sheet_name='Blad1', header=None, usecols="B, C", names=['Kommun', 'Antal fall'])
     afpk = afpk.iloc[::-1]
     afpk = afpk.dropna(subset=['Kommun', 'Antal fall'])
     af = afpk['Antal fall'].copy()

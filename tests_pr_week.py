@@ -7,12 +7,11 @@ from bokeh.models import ColumnDataSource, Range1d, LinearAxis
 def tests_pr_week():
     excelfile = 'https://www.skane.se/globalassets/lagesbild-covid-19-i-skane/prover-och-fall-per-vecka.xlsx'
 
-    pofpv = pd.read_excel(excelfile, sheet_name='Blad1',
-                          usecols=['Unnamed: 0', 'Antal provtagna', 'Antal personer med konstaterad covid-19'])
-
-    pofpv.rename(columns={'Unnamed: 0': 'Vecka'}, inplace=True)
+    pofpv = pd.read_excel(excelfile, sheet_name='Blad1', header=None, usecols="A, B, C",
+                          names=['Vecka', 'Antal provtagningar', 'Antal personer med konstaterad covid-19'])
+    pofpv = pofpv.dropna(subset=['Vecka', 'Antal provtagningar'])
     vecka = pofpv['Vecka'].tolist()
-    prov = pofpv['Antal provtagna'].tolist()
+    prov = pofpv['Antal provtagningar'].tolist()
     prov = [int(i) for i in prov]
     konstaterade = pofpv['Antal personer med konstaterad covid-19'].tolist()
     konstaterade = [int(i) for i in konstaterade]
@@ -27,7 +26,7 @@ def tests_pr_week():
     tooltips = [
         ("Vecka", "@vecka"),
         ("--------------Prover--------------", ""),
-        ("Antal provtagna", "@prover"),
+        ("Antal provtagningar", "@prover"),
         ("-----------Konstaterade-----------", ""),
         ("Antal personer med konstaterad covid-19", "@konstaterade"),
     ]
@@ -38,7 +37,7 @@ def tests_pr_week():
                toolbar_location=None, tools="")
 
     p.vbar(x='vecka', width=0.7, top='prover', color="#bfc8f6", source=source,
-           legend_label="Antal provtagna")
+           legend_label="Antal provtagningar")
     p.yaxis.axis_label = 'Prover vecka'
     p.legend.background_fill_alpha = 0.2
     p.legend.border_line_alpha = 0.0
